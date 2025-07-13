@@ -1,9 +1,12 @@
 //! Core analysis functionality for detecting zero address validation patterns
 
-use crate::types::{AnalysisResult, ConstructorAnalyzerError, FunctionType, ValidationType};
+use std::fs;
+use std::path::Path;
+
 use regex::{Regex, RegexBuilder};
-use std::{fs, path::Path};
 use walkdir::WalkDir;
+
+use crate::types::{AnalysisResult, ConstructorAnalyzerError, FunctionType, ValidationType};
 
 /// Main analyzer struct
 pub struct ConstructorAnalyzer {

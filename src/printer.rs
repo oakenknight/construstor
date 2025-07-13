@@ -1,7 +1,8 @@
 //! Pretty printing functionality for analysis results
 
-use crate::types::{AnalysisResult, FunctionType, ValidationType};
 use colored::*;
+
+use crate::types::{AnalysisResult, FunctionType, ValidationType};
 
 /// Pretty printer for analysis results
 pub struct ResultPrinter;

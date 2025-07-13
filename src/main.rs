@@ -1,5 +1,6 @@
-use construstor::{CliConfig, run};
 use std::process;
+
+use construstor::{CliConfig, run};
 
 fn main() {
     let config = match CliConfig::from_args() {

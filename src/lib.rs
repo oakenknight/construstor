@@ -8,13 +8,13 @@ pub mod cli;
 pub mod printer;
 pub mod types;
 
+use std::error::Error;
+
 pub use analyzer::ConstructorAnalyzer;
 pub use cli::CliConfig;
+use colored::*;
 pub use printer::ResultPrinter;
 pub use types::*;
-
-use colored::*;
-use std::error::Error;
 
 /// Main application logic
 pub fn run(config: CliConfig) -> Result<(), Box<dyn Error>> {

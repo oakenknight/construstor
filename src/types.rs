@@ -1,7 +1,9 @@
 //! Types and data structures used throughout the application
 
+use std::error::Error;
+use std::fmt;
+
 use serde::{Deserialize, Serialize};
-use std::{error::Error, fmt};
 
 /// Custom error type for the application
 #[derive(Debug)]

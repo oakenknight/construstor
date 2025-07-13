@@ -1,7 +1,8 @@
 //! CLI module for handling command-line arguments
 
-use clap::{Arg, Command};
 use std::error::Error;
+
+use clap::{Arg, Command};
 
 /// CLI configuration
 #[derive(Debug)]
