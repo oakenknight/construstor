@@ -1,7 +1,10 @@
 # Construstor - Smart Contract Constructor & Initialize Function Analyzer
 
+[![Crates.io](https://img.shields.io/crates/v/construstor.svg)](https://crates.io/crates/construstor)
+[![Documentation](https://docs.rs/construstor/badge.svg)](https://docs.rs/construstor)
 [![Rust](https://img.shields.io/badge/rust-1.86+-orange.svg)](https://www.rust-lang.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Downloads](https://img.shields.io/crates/d/construstor.svg)](https://crates.io/crates/construstor)
 
 A production-ready tool for analyzing Solidity smart contracts to detect zero address validation patterns in constructors and initialize functions.
 
@@ -28,9 +31,15 @@ A production-ready tool for analyzing Solidity smart contracts to detect zero ad
 ### Build from Source
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/oakenknight/construstor.git
 cd construstor
 cargo build --release
+```
+
+### Install from Crates.io
+
+```bash
+cargo install construstor
 ```
 
 The binary will be available at `target/release/construstor`.
@@ -39,17 +48,22 @@ The binary will be available at `target/release/construstor`.
 
 ### Basic Usage
 
-Run the tool and enter a file path or directory when prompted:
+Run the tool with a file or directory:
 
 ```bash
-cargo run
-# or
-./target/release/construstor
+# Using the installed version
+construstor MyContract.sol
+
+# Or if building from source
+cargo run -- MyContract.sol
+
+# Interactive mode (will prompt for path)
+construstor
 ```
 
 ### Example Output
 
-```
+```text
 Constructor in MyContract.sol:
 📋 Found 2 address argument(s): _owner, _manager
 ✅ Zero address validation found:
