@@ -249,9 +249,11 @@ mod tests {
         assert_eq!(result.address_arguments, vec!["_owner", "_token"]);
         assert_eq!(result.validated_variables, vec!["_owner"]);
         assert_eq!(result.missing_validations, vec!["_token"]);
-        assert!(result
-            .validation_types
-            .contains(&ValidationType::RequireStatement));
+        assert!(
+            result
+                .validation_types
+                .contains(&ValidationType::RequireStatement)
+        );
     }
 
     #[test]
@@ -268,11 +270,15 @@ mod tests {
         assert_eq!(result.address_arguments, vec!["_owner", "_token"]);
         assert_eq!(result.validated_variables, vec!["_owner", "_token"]);
         assert!(result.missing_validations.is_empty());
-        assert!(result
-            .validation_types
-            .contains(&ValidationType::RequireStatement));
-        assert!(result
-            .validation_types
-            .contains(&ValidationType::EqualityCheck));
+        assert!(
+            result
+                .validation_types
+                .contains(&ValidationType::RequireStatement)
+        );
+        assert!(
+            result
+                .validation_types
+                .contains(&ValidationType::EqualityCheck)
+        );
     }
 }
