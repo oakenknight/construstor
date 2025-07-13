@@ -23,7 +23,7 @@ A production-ready tool for analyzing Solidity smart contracts to detect zero ad
 
 ### Prerequisites
 
-- [Rust](https://rustup.rs/) 1.70 or later
+- [Rust](https://rustup.rs/) 1.86 or later
 
 ### Build from Source
 
