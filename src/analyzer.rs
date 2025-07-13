@@ -33,8 +33,7 @@ impl ConstructorAnalyzer {
 
         let address_regex = Regex::new(r"address\s+(\w+)")?;
         let equality_regex = Regex::new(r"(\w+)\s*(?:==|!=)\s*address\(0\)")?;
-        let require_regex =
-            Regex::new(r"(?:require|requre)\s*\(\s*([^,)]+)\s*(?:==|!=)\s*address\(0\)")?;
+        let require_regex = Regex::new(r"(?:require)\s*\(\s*([^,)]+)\s*(?:==|!=)\s*address\(0\)")?;
 
         Ok(Self {
             constructor_regex,
@@ -250,11 +249,9 @@ mod tests {
         assert_eq!(result.address_arguments, vec!["_owner", "_token"]);
         assert_eq!(result.validated_variables, vec!["_owner"]);
         assert_eq!(result.missing_validations, vec!["_token"]);
-        assert!(
-            result
-                .validation_types
-                .contains(&ValidationType::RequireStatement)
-        );
+        assert!(result
+            .validation_types
+            .contains(&ValidationType::RequireStatement));
     }
 
     #[test]
@@ -271,15 +268,11 @@ mod tests {
         assert_eq!(result.address_arguments, vec!["_owner", "_token"]);
         assert_eq!(result.validated_variables, vec!["_owner", "_token"]);
         assert!(result.missing_validations.is_empty());
-        assert!(
-            result
-                .validation_types
-                .contains(&ValidationType::RequireStatement)
-        );
-        assert!(
-            result
-                .validation_types
-                .contains(&ValidationType::EqualityCheck)
-        );
+        assert!(result
+            .validation_types
+            .contains(&ValidationType::RequireStatement));
+        assert!(result
+            .validation_types
+            .contains(&ValidationType::EqualityCheck));
     }
 }

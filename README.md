@@ -12,7 +12,6 @@ A production-ready tool for analyzing Solidity smart contracts to detect zero ad
 - **Zero Address Validation Detection**:
   - Direct equality checks (`== address(0)`, `!= address(0)`)
   - `require()` statements with zero address validation
-  - Handles common typos (e.g., `requre` instead of `require`)
 - **Detailed Reporting**:
   - Shows which address arguments are validated
   - Highlights missing validations
@@ -138,9 +137,8 @@ The tool is structured with the following key components:
 
 ### Require Statements
 
-- Regex: `(?:require|requre)\s*\(\s*([^,)]+)\s*(?:==|!=)\s*address\(0\)`
+- Regex: `(?:require)\s*\(\s*([^,)]+)\s*(?:==|!=)\s*address\(0\)`
 - Matches: `require(_owner != address(0), "message")`
-- Handles typos: `requre(_owner != address(0), "message")`
 
 ## 🚨 Security Considerations
 
