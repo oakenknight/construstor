@@ -1,0 +1,9 @@
+[default.extend-words]
+# sol is Solidity extension
+sol = "sol"
+# construstor is the project name
+construstor = "construstor"
+
+[default]
+# random string
+extend-ignore-re = [ "[0-9A-Za-z+/]{20,}" ]
