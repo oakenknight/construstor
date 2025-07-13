@@ -1,6 +1,6 @@
 # Construstor - Smart Contract Constructor & Initialize Function Analyzer
 
-[![Rust](https://img.shields.io/badge/rust-1.70+-orange.svg)](https://www.rust-lang.org)
+[![Rust](https://img.shields.io/badge/rust-1.86+-orange.svg)](https://www.rust-lang.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A production-ready tool for analyzing Solidity smart contracts to detect zero address validation patterns in constructors and initialize functions.
