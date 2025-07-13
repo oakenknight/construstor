@@ -21,10 +21,10 @@ pub enum ConstructorAnalyzerError {
 impl fmt::Display for ConstructorAnalyzerError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            ConstructorAnalyzerError::IoError(err) => write!(f, "IO error: {}", err),
-            ConstructorAnalyzerError::RegexError(err) => write!(f, "Regex error: {}", err),
-            ConstructorAnalyzerError::NotFound(path) => write!(f, "Path not found: {}", path),
-            ConstructorAnalyzerError::InvalidFormat(msg) => write!(f, "Invalid format: {}", msg),
+            ConstructorAnalyzerError::IoError(err) => write!(f, "IO error: {err}"),
+            ConstructorAnalyzerError::RegexError(err) => write!(f, "Regex error: {err}"),
+            ConstructorAnalyzerError::NotFound(path) => write!(f, "Path not found: {path}"),
+            ConstructorAnalyzerError::InvalidFormat(msg) => write!(f, "Invalid format: {msg}"),
         }
     }
 }
