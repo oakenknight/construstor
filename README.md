@@ -64,7 +64,7 @@ construstor MyContract.sol
 # Analyze ALL functions with address parameters
 construstor MyContract.sol --all-functions
 
-# Output in JSON format (great for CI/CD)
+# Output in JSON format
 construstor MyContract.sol --json
 
 # Show only summary statistics
@@ -258,29 +258,6 @@ This tool helps identify potential security vulnerabilities in smart contracts:
 - **Function Security**: With `--all-functions`, catch missing validations in all address-handling functions
 - **Array Validation**: Detect missing validations for address arrays that could contain zero addresses
 
-## 🔧 CI/CD Integration
-
-The tool is designed for easy integration into continuous integration pipelines:
-
-### GitHub Actions Example
-
-```yaml
-name: Smart Contract Security Check
-on: [push, pull_request]
-
-jobs:
-  security-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@stable
-      - name: Install Construstor
-        run: cargo install construstor
-      - name: Run Security Analysis
-        run: |
-          construstor contracts/ --all-functions --json > analysis.json
-          # Process results or fail if critical issues found
-```
 
 ### Exit Codes
 
