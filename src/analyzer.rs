@@ -182,7 +182,7 @@ impl ConstructorAnalyzer {
         // The full_function_code contains the complete function, but we need just the body for pattern matching
         let function_body = if let Some(start) = full_function_code.find('{') {
             if let Some(end) = full_function_code.rfind('}') {
-                &full_function_code[start + 1..end].trim()
+                full_function_code[start + 1..end].trim()
             } else {
                 full_function_code
             }
