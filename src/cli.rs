@@ -10,6 +10,7 @@ pub struct CliConfig {
     pub input_path: String,
     pub summary_only: bool,
     pub json_output: bool,
+    pub all_functions: bool,
 }
 
 impl CliConfig {
@@ -18,7 +19,7 @@ impl CliConfig {
         let matches = Command::new("construstor")
             .version(env!("CARGO_PKG_VERSION"))
             .author(env!("CARGO_PKG_AUTHORS"))
-            .about("Analyze Solidity smart contracts for zero address validation patterns")
+            .about("Analyze Solidity smart contracts for zero address validation patterns in constructors, initialize functions, and all functions with address parameters")
             .arg(
                 Arg::new("input")
                     .help("Path to Solidity file or directory to analyze")
@@ -39,6 +40,13 @@ impl CliConfig {
                     .help("Output results in JSON format")
                     .action(clap::ArgAction::SetTrue),
             )
+            .arg(
+                Arg::new("all-functions")
+                    .short('a')
+                    .long("all-functions")
+                    .help("Analyze all functions with address parameters, not just constructors and initialize functions")
+                    .action(clap::ArgAction::SetTrue),
+            )
             .get_matches();
 
         let input_path = if let Some(path) = matches.get_one::<String>("input") {
@@ -55,6 +63,7 @@ impl CliConfig {
             input_path,
             summary_only: matches.get_flag("summary"),
             json_output: matches.get_flag("json"),
+            all_functions: matches.get_flag("all-functions"),
         })
     }
 }

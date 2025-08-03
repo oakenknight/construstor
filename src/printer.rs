@@ -11,10 +11,7 @@ impl ResultPrinter {
     /// Prints analysis results with colored output
     pub fn print_results(results: &[AnalysisResult]) {
         if results.is_empty() {
-            println!(
-                "{}",
-                "No constructors or initialize functions found.".yellow()
-            );
+            println!("{}", "No functions with address parameters found.".yellow());
             return;
         }
 
@@ -25,9 +22,10 @@ impl ResultPrinter {
 
     /// Prints a single analysis result
     fn print_single_result(result: &AnalysisResult) {
-        let function_name = match result.function_type {
+        let function_name = match &result.function_type {
             FunctionType::Constructor => "Constructor".green(),
             FunctionType::Initialize => "Initialize function".cyan(),
+            FunctionType::Regular(name) => format!("Function '{}'", name).magenta(),
         };
 
         println!("{} in {}:", function_name, result.file_name);
@@ -35,12 +33,18 @@ impl ResultPrinter {
         if result.address_arguments.is_empty() {
             println!("{}", "ℹ️  No address arguments found".blue());
         } else {
+            let formatted_args: Vec<String> = result
+                .address_arguments
+                .iter()
+                .map(|(arg_type, arg_name)| format!("{} {}", arg_type, arg_name))
+                .collect();
+
             println!(
                 "{}",
                 format!(
                     "📋 Found {} address argument(s): {}",
                     result.address_arguments.len(),
-                    result.address_arguments.join(", ")
+                    formatted_args.join(", ")
                 )
                 .blue()
             );
@@ -89,7 +93,11 @@ impl ResultPrinter {
         }
 
         println!("{}", format!("Arguments: {}", result.arguments).yellow());
-        println!("{}", format!("Code: {}", result.code).blue());
+        println!("{}", "Code:".blue());
+        // Print the code with proper indentation
+        for line in result.code.lines() {
+            println!("  {}", line.blue());
+        }
         println!("{}", "=".repeat(50));
     }
 
