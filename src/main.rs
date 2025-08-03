@@ -15,6 +15,4 @@ fn main() {
         eprintln!("Fatal error: {e}");
         process::exit(1);
     }
-
-    println!("Analysis complete!");
 }

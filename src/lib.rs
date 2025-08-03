@@ -1,7 +1,7 @@
-//! # Construstor - Smart Contract Constructor and Initialize Function Analyzer
+//! # Construstor - Smart Contract Constructor, Initialize Function, and Address Parameter Analyzer
 //!
 //! A library for analyzing Solidity smart contracts to detect zero address validation
-//! patterns in constructors and initialize functions.
+//! patterns in constructors, initialize functions, and all functions with address parameters.
 
 pub mod analyzer;
 pub mod cli;
@@ -20,10 +20,12 @@ pub use types::*;
 pub fn run(config: CliConfig) -> Result<(), Box<dyn Error>> {
     let analyzer = ConstructorAnalyzer::new()?;
 
-    match analyzer.analyze_path(&config.input_path) {
+    match analyzer.analyze_path(&config.input_path, config.all_functions) {
         Ok(results) => {
             if config.json_output {
-                println!("{}", serde_json::to_string_pretty(&results)?);
+                let json_results: Vec<AnalysisResultJson> =
+                    results.iter().map(|r| r.into()).collect();
+                println!("{}", serde_json::to_string_pretty(&json_results)?);
             } else if config.summary_only {
                 ResultPrinter::print_summary(&results);
             } else {
@@ -31,6 +33,7 @@ pub fn run(config: CliConfig) -> Result<(), Box<dyn Error>> {
                 if !results.is_empty() {
                     ResultPrinter::print_summary(&results);
                 }
+                println!("Analysis complete!");
             }
             Ok(())
         }

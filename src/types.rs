@@ -55,6 +55,25 @@ pub struct AnalysisResult {
     /// Function body code
     pub code: String,
     /// Address arguments found in the function signature
+    pub address_arguments: Vec<(String, String)>,
+    /// Variables that have zero address validation
+    pub validated_variables: Vec<String>,
+    /// Variables that are missing zero address validation
+    pub missing_validations: Vec<String>,
+    /// Types of validation found
+    pub validation_types: Vec<ValidationType>,
+}
+
+/// Represents the result of analyzing a function for JSON output (without code field)
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AnalysisResultJson {
+    /// Function type (Constructor or Initialize)
+    pub function_type: FunctionType,
+    /// File name where the function was found
+    pub file_name: String,
+    /// Function arguments
+    pub arguments: String,
+    /// Address arguments found in the function signature
     pub address_arguments: Vec<String>,
     /// Variables that have zero address validation
     pub validated_variables: Vec<String>,
@@ -64,11 +83,30 @@ pub struct AnalysisResult {
     pub validation_types: Vec<ValidationType>,
 }
 
+impl From<&AnalysisResult> for AnalysisResultJson {
+    fn from(result: &AnalysisResult) -> Self {
+        AnalysisResultJson {
+            function_type: result.function_type.clone(),
+            file_name: result.file_name.clone(),
+            arguments: result.arguments.clone(),
+            address_arguments: result
+                .address_arguments
+                .iter()
+                .map(|(_, name)| name.clone())
+                .collect(),
+            validated_variables: result.validated_variables.clone(),
+            missing_validations: result.missing_validations.clone(),
+            validation_types: result.validation_types.clone(),
+        }
+    }
+}
+
 /// Type of function being analyzed
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum FunctionType {
     Constructor,
     Initialize,
+    Regular(String), // Function name for regular functions
 }
 
 /// Type of zero address validation found

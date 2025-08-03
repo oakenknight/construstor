@@ -1,6 +1,6 @@
 [package]
 name        = "construstor"
-version     = "0.1.0"
+version     = "0.1.1"
 edition     = "2024"
 authors     = [ "Aleksandar Ignjatijevic <a.ignjatijevic@gmail.com>" ]
 description = "A tool for analyzing Solidity smart contracts to detect zero address validation patterns"
