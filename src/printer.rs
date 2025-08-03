@@ -33,11 +33,12 @@ impl ResultPrinter {
         if result.address_arguments.is_empty() {
             println!("{}", "ℹ️  No address arguments found".blue());
         } else {
-            let formatted_args: Vec<String> = result.address_arguments
+            let formatted_args: Vec<String> = result
+                .address_arguments
                 .iter()
                 .map(|(arg_type, arg_name)| format!("{} {}", arg_type, arg_name))
                 .collect();
-            
+
             println!(
                 "{}",
                 format!(
